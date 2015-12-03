@@ -48,7 +48,6 @@ window.onload = function() {
   };
   checkColor = function(theme, color) {
     var bL, gL, l, rL;
-    console.log(theme);
     rL = theme[0] - color[0];
     gL = theme[1] - color[1];
     bL = theme[2] - color[2];
