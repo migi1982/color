@@ -55,7 +55,6 @@ window.onload = ->
     return
 
   checkColor = (theme, color)->
-    console.log theme
     rL = theme[0] - color[0]
     gL = theme[1] - color[1]
     bL = theme[2] - color[2]
