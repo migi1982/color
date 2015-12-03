@@ -72,7 +72,7 @@ window.onload = function() {
     if (r > 255) {
       r = 255;
     }
-    g = (gamma + 180) * 255 / 360 << 0;
+    g = (gamma + 90) * 255 / 180 << 0;
     if (g < 0) {
       g = 0;
     }
