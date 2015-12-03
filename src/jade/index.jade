@@ -1,0 +1,25 @@
+doctype html
+html
+  head(lang="ja")
+    link(href='https://fonts.googleapis.com/css?family=Fugaz+One', rel='stylesheet' type='text/css')
+    link(rel="stylesheet",href="main.css")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
+  body
+    #theme.color-area.question(show="off")
+      p
+        span#d 0
+    #answer.color-area.answer(show="off")
+      p
+        | R:&nbsp;
+        span#x 0
+      p
+        | G:&nbsp;
+        span#y 0
+      p
+        | B:&nbsp;
+        span#z 0
+    .timer-area
+      p#timer 0
+  //- script(src="/assets/js/application.js")
+  script(src="js/main.js")
+
