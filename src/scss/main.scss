@@ -1,4 +1,5 @@
 @import 'base/reset';
+@import 'base/twitter';
 html,
 body {
   height: 100%;
@@ -46,15 +47,6 @@ body {
   }
 }
 
-@keyframes show {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
 .timer-area {
   position: absolute;
   line-height: 20px;
@@ -65,4 +57,60 @@ body {
   text-align: center;
   color: #fff;
   text-shadow: 1px 1px 1px #fff;
+}
+
+.result-area {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: 240px;
+  margin-left: -150px;
+  margin-top: -120px;
+  border-radius: 10px;
+  background: #fff;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 20px;
+  .title {
+    font-size: 200%;
+    margin-bottom: 20px;
+  }
+  .info {
+    font-size: 120%;
+    margin-bottom: 10px;
+  }
+  .time {
+    font-size: 200%;
+    margin-bottom: 20px;
+  }
+  .tweet {
+    margin: 20px auto;
+  }
+  .restart {
+    border: 1px solid #ccc;
+    padding: 4px;
+    width: 70px;
+    margin: 0 auto;
+    border-radius: 4px;
+  }
+  &[show="on"] {
+    display: block;
+    animation-timing-function: ease-out;
+    animation-iteration-count: 1;
+    animation-delay: 0s;
+    transform-origin: 50% 50%;
+    animation-name: show;
+    animation-duration: 1s;
+  }
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

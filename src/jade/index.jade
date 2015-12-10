@@ -20,6 +20,17 @@ html
         span#z 0
     .timer-area
       p#timer 0
-  //- script(src="/assets/js/application.js")
+    #result.result-area
+      p.title Congrats!!
+      p.info Your Clear Time is
+      p#clearTime.time 00
+      p.tweet
+        a#tweet.my-twitter-btn
+          i
+          span Tweet
+        //- a#tweet(href="https://twitter.com/share",class="twitter-share-button",data-text="hoge",data-via="migi",data-size="large",data-hashtags="fuga,foo") Tweet
+        //- script.
+          !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+      p#restart.restart restart!
   script(src="js/main.js")
 

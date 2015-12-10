@@ -1,8 +1,10 @@
 window.onload = function() {
-  var DISTANCE, HINT1, HINT2, answerElem, checkColor, dElem, deviceorientationHandler, reset, resetHint, rnd, setColor, setTheme, setTimer, theme, themeElem, time, timerElem, xElem, yElem, zElem;
+  var DISTANCE, HASHTAG, HINT1, HINT2, TITLE, answerElem, checkColor, clearTimeElem, dElem, deviceorientationHandler, hint1timer, hint2timer, reset, resetHint, restart, restartElem, resultElem, rnd, setColor, setTheme, setTimer, showResult, theme, themeElem, time, timer, timerElem, tweetElem, xElem, yElem, zElem;
   DISTANCE = 10;
-  HINT1 = 20;
-  HINT2 = 40;
+  HINT1 = 2;
+  HINT2 = 4;
+  TITLE = 'hoge';
+  HASHTAG = 'fuga';
   themeElem = document.getElementById('theme');
   answerElem = document.getElementById('answer');
   timerElem = document.getElementById('timer');
@@ -10,8 +12,15 @@ window.onload = function() {
   yElem = document.getElementById('y');
   zElem = document.getElementById('z');
   dElem = document.getElementById('d');
+  resultElem = document.getElementById('result');
+  clearTimeElem = document.getElementById('clearTime');
+  tweetElem = document.getElementById('tweet');
+  restartElem = document.getElementById('restart');
   theme = [];
   time = 0;
+  timer = false;
+  hint1timer = false;
+  hint2timer = false;
   rnd = function(num) {
     return Math.random() * num << 0;
   };
@@ -25,26 +34,26 @@ window.onload = function() {
   setTimer = function() {
     time = 0;
     timerElem.textContent = time;
-    setInterval(function() {
+    timer = setInterval(function() {
       time++;
       return timerElem.textContent = time;
     }, 1000);
+  };
+  resetHint = function() {
+    themeElem.setAttribute('show', 'off');
+    answerElem.setAttribute('show', 'off');
+    hint1timer = setTimeout(function() {
+      return answerElem.setAttribute('show', 'on');
+    }, HINT1 * 1000);
+    hint2timer = setTimeout(function() {
+      return themeElem.setAttribute('show', 'on');
+    }, HINT2 * 1000);
   };
   reset = function() {
     setTheme();
     setColor(theme);
     resetHint();
     setTimer();
-  };
-  resetHint = function() {
-    themeElem.setAttribute('show', 'off');
-    answerElem.setAttribute('show', 'off');
-    setTimeout(function() {
-      return answerElem.setAttribute('show', 'on');
-    }, HINT1 * 1000);
-    setTimeout(function() {
-      return themeElem.setAttribute('show', 'on');
-    }, HINT2 * 1000);
   };
   checkColor = function(theme, color) {
     var bL, gL, l, rL;
@@ -58,6 +67,27 @@ window.onload = function() {
     } else {
       return false;
     }
+  };
+  showResult = function() {
+    var b, color, g, r, str, url;
+    clearInterval(timer);
+    themeElem.setAttribute('show', 'off');
+    answerElem.setAttribute('show', 'off');
+    clearTimeout(hint1timer);
+    clearTimeout(hint2timer);
+    clearTimeElem.textContent = time;
+    r = theme[0].toString(16);
+    g = theme[1].toString(16);
+    b = theme[2].toString(16);
+    color = "" + r + g + b;
+    str = TITLE + "を" + time + "秒でクリアー！";
+    url = "https://twitter.com/intent/tweet?hashtags=" + HASHTAG + "%2c" + color + "&text=" + str + "&url=http%3A%2F%2Fmigi1982.github.io%2Fcolor%2F";
+    tweetElem.setAttribute('href', url);
+    resultElem.setAttribute('show', 'on');
+  };
+  restart = function() {
+    resultElem.setAttribute('show', 'off');
+    reset();
   };
   deviceorientationHandler = function(event) {
     var alpha, b, beta, color, g, gamma, r;
@@ -94,8 +124,7 @@ window.onload = function() {
     color = "rgb(" + r + "," + g + "," + b + ")";
     answerElem.style.background = color;
     if (checkColor(theme, [r, g, b])) {
-      alert("Congrats!!\ntime: " + time);
-      reset();
+      showResult();
     }
     xElem.textContent = r;
     yElem.textContent = g;
@@ -103,4 +132,7 @@ window.onload = function() {
   };
   reset();
   window.addEventListener('deviceorientation', deviceorientationHandler);
+  restartElem.onclick = function() {
+    restart();
+  };
 };

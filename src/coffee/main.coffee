@@ -1,9 +1,17 @@
 window.onload = ->
 
+  # 正解とみなす距離
   DISTANCE = 10
-  HINT1 = 20
-  HINT2 = 40
+  # ヒント1を出すまでの秒数
+  HINT1 = 2
+  # ヒント2を出すまでの秒数
+  HINT2 = 4
+  # アプリのタイトル
+  TITLE = 'hoge'
+  # アプリのハッシュタグ
+  HASHTAG = 'fuga'
 
+  # DOMの取得
   themeElem = document.getElementById('theme')
   answerElem = document.getElementById('answer')
   timerElem = document.getElementById('timer')
@@ -11,9 +19,16 @@ window.onload = ->
   yElem = document.getElementById('y')
   zElem = document.getElementById('z')
   dElem = document.getElementById('d')
+  resultElem = document.getElementById('result')
+  clearTimeElem = document.getElementById('clearTime')
+  tweetElem = document.getElementById('tweet')
+  restartElem = document.getElementById('restart')
 
   theme = []
   time = 0;
+  timer = false
+  hint1timer = false
+  hint2timer = false
 
   rnd = (num)->
     Math.random() * num << 0
@@ -30,10 +45,21 @@ window.onload = ->
   setTimer = ->
     time = 0;
     timerElem.textContent = time
-    setInterval( ->
+    timer = setInterval( ->
       time++
       timerElem.textContent = time
     , 1000)
+    return
+
+  resetHint = ->
+    themeElem.setAttribute 'show', 'off'
+    answerElem.setAttribute 'show', 'off'
+    hint1timer = setTimeout( ->
+      answerElem.setAttribute 'show', 'on'
+    , HINT1 * 1000)
+    hint2timer = setTimeout( ->
+      themeElem.setAttribute 'show', 'on'
+    , HINT2 * 1000)
     return
 
   reset = ->
@@ -41,17 +67,6 @@ window.onload = ->
     setColor(theme)
     resetHint()
     setTimer()
-    return
-
-  resetHint = ->
-    themeElem.setAttribute 'show', 'off'
-    answerElem.setAttribute 'show', 'off'
-    setTimeout( ->
-      answerElem.setAttribute 'show', 'on'
-    , HINT1 * 1000)
-    setTimeout( ->
-      themeElem.setAttribute 'show', 'on'
-    , HINT2 * 1000)
     return
 
   checkColor = (theme, color)->
@@ -64,6 +79,29 @@ window.onload = ->
       return true
     else
       return false
+
+  showResult = ->
+    clearInterval timer
+    themeElem.setAttribute 'show', 'off'
+    answerElem.setAttribute 'show', 'off'
+    clearTimeout hint1timer
+    clearTimeout hint2timer
+    clearTimeElem.textContent = time
+    r = theme[0].toString(16)
+    g = theme[1].toString(16)
+    b = theme[2].toString(16)
+    color = "#{r}#{g}#{b}"
+    # link = "http://dummyimage.com/600/#{color}/#{color}"
+    str = "#{TITLE}を#{time}秒でクリアー！"
+    url = "https://twitter.com/intent/tweet?hashtags=#{HASHTAG}%2c#{color}&text=#{str}&url=http%3A%2F%2Fmigi1982.github.io%2Fcolor%2F"
+    tweetElem.setAttribute 'href', url
+    resultElem.setAttribute 'show', 'on'
+    return
+
+  restart = ->
+    resultElem.setAttribute 'show', 'off'
+    reset()
+    return
 
   deviceorientationHandler = (event)->
     beta = event.beta
@@ -87,8 +125,7 @@ window.onload = ->
     answerElem.style.background = color
 
     if checkColor(theme, [r, g, b])
-      alert "Congrats!!\ntime: #{time}"
-      reset()
+      showResult()
 
     xElem.textContent = r
     yElem.textContent = g
@@ -97,4 +134,12 @@ window.onload = ->
 
   reset()
   window.addEventListener 'deviceorientation', deviceorientationHandler
+  restartElem.onclick = ->
+    restart()
+    return
+
+  # setTimeout ->
+  #   showResult()
+  # , 1000
+
   return
