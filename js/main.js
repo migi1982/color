@@ -84,6 +84,12 @@ window.onload = function() {
     url = "https://twitter.com/intent/tweet?hashtags=" + HASHTAG + "%2c" + color + "&text=" + str + "&url=http%3A%2F%2Fmigi1982.github.io%2Fcolor%2F";
     tweetElem.setAttribute('href', url);
     resultElem.setAttribute('show', 'on');
+    ga('send', {
+      hitType: 'event',
+      eventCategory: 'cleartime',
+      eventAction: 'clear',
+      eventValue: time
+    });
   };
   restart = function() {
     resultElem.setAttribute('show', 'off');
