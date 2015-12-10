@@ -7,9 +7,9 @@ window.onload = ->
   # ヒント2を出すまでの秒数
   HINT2 = 40
   # アプリのタイトル
-  TITLE = 'hoge'
-  # アプリのハッシュタグ
-  HASHTAG = 'fuga'
+  TITLE = 'RGB_XYZ'
+  # ハッシュタグ
+  HASHTAG = 'RGB_XYZ'
 
   # DOMの取得
   themeElem = document.getElementById('theme')
@@ -137,9 +137,5 @@ window.onload = ->
   restartElem.onclick = ->
     restart()
     return
-
-  # setTimeout ->
-  #   showResult()
-  # , 1000
 
   return
