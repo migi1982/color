@@ -3,9 +3,9 @@ window.onload = ->
   # 正解とみなす距離
   DISTANCE = 10
   # ヒント1を出すまでの秒数
-  HINT1 = 2
+  HINT1 = 20
   # ヒント2を出すまでの秒数
-  HINT2 = 4
+  HINT2 = 40
   # アプリのタイトル
   TITLE = 'hoge'
   # アプリのハッシュタグ

@@ -1,8 +1,8 @@
 window.onload = function() {
   var DISTANCE, HASHTAG, HINT1, HINT2, TITLE, answerElem, checkColor, clearTimeElem, dElem, deviceorientationHandler, hint1timer, hint2timer, reset, resetHint, restart, restartElem, resultElem, rnd, setColor, setTheme, setTimer, showResult, theme, themeElem, time, timer, timerElem, tweetElem, xElem, yElem, zElem;
   DISTANCE = 10;
-  HINT1 = 2;
-  HINT2 = 4;
+  HINT1 = 20;
+  HINT2 = 40;
   TITLE = 'hoge';
   HASHTAG = 'fuga';
   themeElem = document.getElementById('theme');
