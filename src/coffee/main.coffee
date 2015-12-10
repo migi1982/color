@@ -29,6 +29,7 @@ window.onload = ->
   timer = false
   hint1timer = false
   hint2timer = false
+  playing = false
 
   rnd = (num)->
     Math.random() * num << 0
@@ -67,6 +68,7 @@ window.onload = ->
     setColor(theme)
     resetHint()
     setTimer()
+    playing = true
     return
 
   checkColor = (theme, color)->
@@ -96,12 +98,14 @@ window.onload = ->
     url = "https://twitter.com/intent/tweet?hashtags=#{HASHTAG}%2c#{color}&text=#{str}&url=http%3A%2F%2Fmigi1982.github.io%2Fcolor%2F"
     tweetElem.setAttribute 'href', url
     resultElem.setAttribute 'show', 'on'
-    ga('send', {
-      hitType: 'event',
-      eventCategory: 'cleartime',
-      eventAction: 'clear',
-      eventValue: time
-    })
+    if playing
+      ga('send', {
+        hitType: 'event',
+        eventCategory: 'cleartime',
+        eventAction: 'clear',
+        eventValue: time
+      })
+    playing = false
     return
 
   restart = ->

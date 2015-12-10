@@ -1,5 +1,5 @@
 window.onload = function() {
-  var DISTANCE, HASHTAG, HINT1, HINT2, TITLE, answerElem, checkColor, clearTimeElem, dElem, deviceorientationHandler, hint1timer, hint2timer, reset, resetHint, restart, restartElem, resultElem, rnd, setColor, setTheme, setTimer, showResult, theme, themeElem, time, timer, timerElem, tweetElem, xElem, yElem, zElem;
+  var DISTANCE, HASHTAG, HINT1, HINT2, TITLE, answerElem, checkColor, clearTimeElem, dElem, deviceorientationHandler, hint1timer, hint2timer, playing, reset, resetHint, restart, restartElem, resultElem, rnd, setColor, setTheme, setTimer, showResult, theme, themeElem, time, timer, timerElem, tweetElem, xElem, yElem, zElem;
   DISTANCE = 10;
   HINT1 = 20;
   HINT2 = 40;
@@ -21,6 +21,7 @@ window.onload = function() {
   timer = false;
   hint1timer = false;
   hint2timer = false;
+  playing = false;
   rnd = function(num) {
     return Math.random() * num << 0;
   };
@@ -54,6 +55,7 @@ window.onload = function() {
     setColor(theme);
     resetHint();
     setTimer();
+    playing = true;
   };
   checkColor = function(theme, color) {
     var bL, gL, l, rL;
@@ -84,12 +86,15 @@ window.onload = function() {
     url = "https://twitter.com/intent/tweet?hashtags=" + HASHTAG + "%2c" + color + "&text=" + str + "&url=http%3A%2F%2Fmigi1982.github.io%2Fcolor%2F";
     tweetElem.setAttribute('href', url);
     resultElem.setAttribute('show', 'on');
-    ga('send', {
-      hitType: 'event',
-      eventCategory: 'cleartime',
-      eventAction: 'clear',
-      eventValue: time
-    });
+    if (playing) {
+      ga('send', {
+        hitType: 'event',
+        eventCategory: 'cleartime',
+        eventAction: 'clear',
+        eventValue: time
+      });
+    }
+    playing = false;
   };
   restart = function() {
     resultElem.setAttribute('show', 'off');
