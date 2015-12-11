@@ -91,7 +91,8 @@ window.onload = function() {
         hitType: 'event',
         eventCategory: 'cleartime',
         eventAction: 'clear',
-        eventValue: time
+        eventValue: time,
+        eventLabel: time
       });
     }
     playing = false;
