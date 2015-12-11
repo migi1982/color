@@ -2,7 +2,7 @@ var ua;
 
 ua = navigator.userAgent.toUpperCase();
 
-if (ua.indexOf('IPHONE') > 0 || ua.indexOf('ANDROID') > 0 || ua.indexOf('MOBILE') > 0) {
+if (!(ua.indexOf('IPHONE') > 0 || ua.indexOf('ANDROID') > 0 || ua.indexOf('MOBILE') > 0)) {
   alert('Please access by your smartphone.');
 }
 
