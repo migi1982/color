@@ -1,3 +1,11 @@
+var ua;
+
+ua = navigator.userAgent.toUpperCase();
+
+if (ua.indexOf('IPHONE') > 0 || ua.indexOf('ANDROID') > 0 || ua.indexOf('MOBILE') > 0) {
+  alert('Please access by your smartphone.');
+}
+
 window.onload = function() {
   var DISTANCE, HASHTAG, HINT1, HINT2, TITLE, answerElem, checkColor, clearTimeElem, dElem, deviceorientationHandler, hint1timer, hint2timer, playing, reset, resetHint, restart, restartElem, resultElem, rnd, setColor, setTheme, setTimer, showResult, theme, themeElem, time, timer, timerElem, tweetElem, xElem, yElem, zElem;
   DISTANCE = 10;
